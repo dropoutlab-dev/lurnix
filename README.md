@@ -1,23 +1,36 @@
-# Curious Learners — Full-Stack Developer Learning Platform & GitHub Curriculum Workspace
+# Lurnix — Project-Based Technology Learning Platform
 
-**Official Starter / Master Repository:**  
-[`https://github.com/curiouslearner35/frontend-bootcamp`](https://github.com/curiouslearner35/frontend-bootcamp)
+> **"Learn by Building. Grow by Creating."**  
+> An open, production-grade learning platform by [DropOutLab](https://github.com/dropoutlab-dev).
+
+Official Platform Repository: [`https://github.com/dropoutlab-dev/lurnix`](https://github.com/dropoutlab-dev/lurnix)  
+Domain: [`lurnix.tech`](https://lurnix.tech)
 
 ---
 
 ## 🚀 Overview
 
-Curious Learners is an offline-first, local-first web application designed to teach modern full-stack web development with a foundational **"Learn Git Before Learning Code"** methodology.
+**Lurnix** is an offline-first, local-first web application and developer learning platform built by DropOutLab. It teaches modern full-stack web engineering and software craft with a foundational **"Learn Git Before Learning Code"** methodology and hands-on, project-driven progression (**Learn → Build → Evolve**).
 
-The platform provides a complete 12-week curriculum (191+ lessons, 30+ verified projects) with an embedded terminal sandbox, live code editor, 100DaysOfCode learning journal, and a Git-backed workspace engine where each authenticated student provisions their own persistent GitHub repository fork.
+The platform features:
+- **12-Week Structured Curriculum**: 191+ lessons and 30+ verified hands-on projects spanning HTML, CSS, JavaScript, React, Node.js, and Full-Stack systems.
+- **Embedded Terminal Sandbox**: In-browser command-line environment and live code execution sandbox.
+- **Git-Backed Student Workspace Engine (v3)**: Direct integration with GitHub where students maintain automated week/lesson sub-branches, commit homework, and track GitHub Pages live deployments.
+- **100DaysOfCode Journal**: Real-time study logs, WakaTime-style activity tracking, and streak analytics.
+- **Mentor Review & Verifiable Credentials**: Instructor command center (`/root`), homework evaluation (0–100 scale, letter grades), revision workflow, and cryptographically verified graduation certificates.
+- **Offline & PWA Resilience**: Background sync queue, service worker caching, and persistent offline state.
 
-```
-CURRICULUM UPSTREAM STARTER
-https://github.com/curiouslearner35/frontend-bootcamp
-         │ (1 Student = 1 Lifetime Fork)
+---
+
+## 🌟 Core Architecture
+
+```text
+CURRICULUM UPSTREAM / STARTER
+https://github.com/dropoutlab-dev/lurnix-starter (or upstream curriculum)
+         │ (1 Student = 1 Persistent Fork)
          ▼
 STUDENT GITHUB WORKSPACE
-https://github.com/{studentGithubUsername}/frontend-bootcamp
+https://github.com/{studentGithubUsername}/lurnix-workspace
          │
          ├── main
          ├── week-00 ──► week-00/lesson-00-01
@@ -26,30 +39,6 @@ https://github.com/{studentGithubUsername}/frontend-bootcamp
          │           ──► week-01/lesson-01-03
          └── ...
 ```
-
----
-
-## 🌟 Core Architecture & Capabilities
-
-### 1. Curriculum & Learning Engine
-- **12-Week Syllabus (191 Lessons & 30 Projects)**: Complete path covering HTML5, CSS3, Responsive Design, JavaScript, DOM, ES6+, React Core, Advanced React, Redux/Testing, Node/Express Backend, Full-Stack Architecture, and Portfolio Capstones.
-- **Visual Lesson Detail Engine**: Detailed breakdown with Duration, Module badges, `🎯 OBJECTIVES`, `🧠 CORE CONCEPTS`, `🛠 PRACTICE TASK`, and `📚 RESOURCES`.
-- **Interactive Terminal & Sandbox**: In-browser Apple-native terminal CLI and live JavaScript/React code sandbox.
-- **Activity & Progression Tracking**: WakaTime-style learning tracker, daily goals, XP, streaks, and gem economy.
-
-### 2. GitHub Curriculum Workspace v3
-- **Immutable Upstream Blueprint**: `https://github.com/curiouslearner35/frontend-bootcamp` acts as the starter repository.
-- **Deterministic 1 Student = 1 Fork Invariant**: Scoped per student across all 12 weeks.
-- **Deterministic Branch Hierarchy**:
-  - Week Branch: `week-XX`
-  - Lesson Sub-Branch: `week-XX/lesson-XX-YY`
-- **100DaysOfCode Journal**: Cumulative `LOG.md` and lesson journals at `docs/curriculum/week-XX/lesson-XX-YY.md`.
-- **Atomic Submissions**: Multi-file code attachments, deterministic commit SHAs, GitHub Issues, and mentor notifications.
-- **GitHub Pages Deployments**: Automated deployment tracking (`NOT_READY` $\rightarrow$ `READY` $\rightarrow$ `DEPLOY_REQUESTED` $\rightarrow$ `BUILDING` $\rightarrow$ `DEPLOYED`).
-
-### 3. Mentor Review & Verifiable Credentials
-- **Instructor Command Center (`/root`) & Mentor Dashboard**: Review submitted homework, assign marks (0–100 scale), apply letter grades (`A+`, `A`, `B`, `C`, `Fail`), and provide revision feedback.
-- **Verifiable Graduation Certificates**: Automated minting for scores $\ge 60$ marks with cryptographic verification hashes and printable PDF preview (`/api/certificates/:id`).
 
 ---
 
@@ -62,8 +51,8 @@ https://github.com/{studentGithubUsername}/frontend-bootcamp
 ### Installation
 ```bash
 # Clone the repository
-git clone https://github.com/curiouslearner35/frontend-bootcamp.git
-cd frontend-bootcamp
+git clone https://github.com/dropoutlab-dev/lurnix.git
+cd lurnix
 
 # Install dependencies
 npm install
@@ -73,11 +62,11 @@ cp .env.example .env
 ```
 
 ### Environment Variables
-Configure `.env` as required (placeholders in `.env.example`):
-- `GEMINI_API_KEY`: Server-side Gemini API access.
+Configure `.env` as required (see `.env.example`):
+- `GEMINI_API_KEY`: Server-side Gemini AI features.
 - `APP_URL`: Host application URL for OAuth redirects.
-- `ROOT_MASTER_KEY`: Instructor dashboard access key.
-- `GITHUB_CLIENT_ID` & `GITHUB_CLIENT_SECRET`: GitHub OAuth App credentials.
+- `ROOT_MASTER_KEY`: Instructor dashboard administrative access key.
+- `GITHUB_CLIENT_ID` & `GITHUB_CLIENT_SECRET`: GitHub OAuth application credentials.
 - `GITHUB_CALLBACK_URL`: Server-side OAuth callback endpoint.
 
 ### Scripts
@@ -85,10 +74,10 @@ Configure `.env` as required (placeholders in `.env.example`):
 # Start full-stack development server (Express backend + Vite middleware on Port 3000)
 npm run dev
 
-# Run TypeScript typechecks
+# Run TypeScript typechecks and linting
 npm run lint
 
-# Run E2E verification test suite (27 test cases)
+# Run automated test suite
 npm test
 
 # Production build (Vite SPA + Node.js bundle)
@@ -100,14 +89,15 @@ npm start
 
 ---
 
-## 🔒 Security Principles
+## 🔒 Security & Privacy Principles
 
-- **Zero Client Token Storage**: No GitHub access tokens, App private keys, or OAuth secrets are stored in client `LocalStorage` or exposed to the browser.
-- **Server-Side API Proxy**: All mutations and external GitHub API interactions execute server-side.
-- **Path Traversal Defense**: All file uploads strictly validated against directory traversal (`../` prohibited).
-- **Idempotency**: All mutation endpoints use deterministic idempotency keys to prevent duplicate commits or issue generation.
+- **Zero Client Token Storage**: No GitHub access tokens, app secrets, or credentials stored in client `localStorage` or exposed to the browser.
+- **Server-Side API Proxy**: All external GitHub API interactions, OAuth token exchanges, and sensitive operations execute through backend proxy endpoints.
+- **Path Traversal Defense**: All file and asset operations validate against path traversal attacks.
+- **Idempotency**: All mutation endpoints use deterministic idempotency keys to prevent duplicate commits or submissions.
 
 ---
 
 ## 📄 License
-MIT License. Curious Learners Academy.
+
+MIT License © 2026 [DropOutLab](https://github.com/dropoutlab-dev).
