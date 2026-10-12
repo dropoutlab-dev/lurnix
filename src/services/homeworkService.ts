@@ -451,7 +451,7 @@ class HomeworkService {
     const issueNumber = 100 + Math.floor(Math.random() * 800);
     const gitHubIssue: MentorReviewIssue = {
       issueNumber,
-      issueUrl: `https://github.com/curiouslearner35/frontend-bootcamp/issues/${issueNumber}`,
+      issueUrl: `https://github.com/dropoutlab-dev/lurnix/issues/${issueNumber}`,
       title: `[Week ${weekStr}][Lesson ${weekStr}-${lessonStr}] Homework Submission — ${user.name || user.username}`,
       labels: ['homework', `week-${weekStr}`, `lesson-${weekStr}-${lessonStr}`, 'under-review'],
       state: 'open',

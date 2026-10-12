@@ -6,9 +6,12 @@
  * -> GitHub Pages Deployment -> Mentor Review & GitHub Issue -> Verified Certificate
  */
 
-export const UPSTREAM_CURRICULUM_REPO = 'https://github.com/curiouslearner35/frontend-bootcamp';
-export const UPSTREAM_REPO_NAME = 'frontend-bootcamp';
-export const UPSTREAM_ORG = 'curiouslearner35';
+export const UPSTREAM_CURRICULUM_REPO = 'https://github.com/dropoutlab-dev/lurnix';
+export const UPSTREAM_REPO_NAME = 'lurnix';
+export const UPSTREAM_ORG = 'dropoutlab-dev';
+
+export const STUDENT_STARTER_REPO = 'https://github.com/dropoutlab-dev/lurnix-starter';
+export const STUDENT_STARTER_NAME = 'lurnix-starter';
 
 export type ForkState =
   | 'NOT_CONNECTED'

@@ -167,8 +167,8 @@ async function runAllTests() {
   await runTest('TC-08', 'Workspace Provisioning', 'Upstream Starter Binding Confirmation', async () => {
     const res = await apiRequest(`/api/workspaces/${workspaceId}`);
     assert(res.status === 200, `Expected 200, got ${res.status}`);
-    assert(res.data.workspace.sourceOwner === 'curiouslearner35', 'Expected sourceOwner curiouslearner35');
-    assert(res.data.workspace.sourceRepository === 'frontend-bootcamp', 'Expected sourceRepository frontend-bootcamp');
+    assert(res.data.workspace.sourceOwner === 'dropoutlab-dev', 'Expected sourceOwner dropoutlab-dev');
+    assert(res.data.workspace.sourceRepository === 'lurnix', 'Expected sourceRepository lurnix');
   });
 
   // TC-09 & TC-10: Week Branch & Lesson Sub-Branch Creation & Idempotency

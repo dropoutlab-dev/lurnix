@@ -669,7 +669,7 @@ export const MentorDashboard: React.FC<MentorDashboardProps> = ({
                   </div>
                 </div>
                 <p className="text-[10px] text-[var(--text-muted)] font-sans">
-                  Forked from <code className="text-indigo-400">curious-learners/frontend-bootcamp</code>.
+                  Forked from <code className="text-indigo-400">dropoutlab-dev/lurnix</code> (Official Starter: <code className="text-cyan-400">dropoutlab-dev/lurnix-starter</code>).
                 </p>
               </div>
 
