@@ -14,7 +14,7 @@ import {
   loadSyncQueue,
   saveSyncQueue
 } from './services/storage';
-import { queueMutation, startBackgroundSyncWorker } from './services/syncWorker';
+import { queueMutation, startBackgroundSyncWorker, triggerManualSync } from './services/syncWorker';
 import { updateActiveUserProfile, signOutUser } from './services/auth';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth, db } from './services/firebase';
@@ -134,13 +134,15 @@ export default function App() {
     }
   };
 
-  // Apply root theme CSS class
+  // Apply root theme CSS class and data-theme attribute
   useEffect(() => {
     const root = document.documentElement;
     if (theme === 'dark') {
       root.classList.add('dark');
+      root.setAttribute('data-theme', 'dark');
     } else {
       root.classList.remove('dark');
+      root.setAttribute('data-theme', 'light');
     }
     saveLocalTheme(theme);
   }, [theme]);
@@ -423,7 +425,11 @@ export default function App() {
         onToggleLanguage={handleToggleLanguage}
         onToggleTheme={handleToggleTheme}
         isOnline={isOnline}
-        pendingSyncCount={syncQueue.filter((q) => q.status === 'pending').length}
+        pendingSyncCount={syncQueue.filter((q) => q.status === 'pending' || q.status === 'failed' || q.status === 'syncing').length}
+        onSyncNow={async () => {
+          await triggerManualSync();
+          setSyncQueue(loadSyncQueue());
+        }}
         onStartSession={() => openSessionPlanner()}
         onOpenGemsLedger={() => setActiveTab('profile')}
       />

@@ -58,7 +58,7 @@ export const PromotionalPage: React.FC<PromotionalPageProps> = ({
   // Inject SEO Metadata & Schema.org JSON-LD structured data on mount
   useEffect(() => {
     const originalTitle = document.title;
-    document.title = 'Codazi BootCamp – 12-Week Full-Stack Web Development Bootcamp';
+    document.title = 'Lurnix – Learn by Building. Grow by Creating.';
 
     // Meta description
     let metaDescription = document.querySelector('meta[name="description"]');
@@ -70,7 +70,7 @@ export const PromotionalPage: React.FC<PromotionalPageProps> = ({
     }
     metaDescription.setAttribute(
       'content',
-      'Master Web Development in 3 Months with Codazi BootCamp. 12 structured weeks, 180+ lessons, and 30+ real portfolio projects. Learn Git, JavaScript, React, Node, and PWA.'
+      'Lurnix (lurnix.tech) is a modern project-based technology learning platform. Master programming, practical software engineering, and future technology skills through hands-on building.'
     );
 
     // Schema.org JSON-LD
@@ -86,13 +86,13 @@ export const PromotionalPage: React.FC<PromotionalPageProps> = ({
     const jsonLdData = {
       '@context': 'https://schema.org',
       '@type': 'Course',
-      'name': 'Codazi 12-Week Full-Stack Web Development BootCamp',
+      'name': 'Lurnix 12-Week Full-Stack Web Development Bootcamp',
       'description':
         'A comprehensive 12-week developer bootcamp with 180+ lessons and 30+ real-world projects covering Git, HTML5, CSS3, ES6+ JavaScript, React, Redux, Node.js, and Cloud Deployment.',
       'provider': {
         '@type': 'EducationalOrganization',
-        'name': 'Codazi Academy',
-        'sameAs': typeof window !== 'undefined' ? window.location.origin : 'https://codazi.academy'
+        'name': 'Lurnix',
+        'sameAs': 'https://lurnix.tech'
       },
       'educationalCredentialAwarded': 'Certified Full-Stack Web Developer',
       'hasCourseInstance': {
@@ -168,14 +168,14 @@ export const PromotionalPage: React.FC<PromotionalPageProps> = ({
         <div className="max-w-6xl mx-auto flex items-center justify-between gap-3">
           {/* Logo & Brand */}
           <div className="flex items-center gap-2 cursor-pointer" onClick={() => onNavigateToApp('home')}>
-            <div className="h-9 w-9 rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-500 to-cyan-400 text-white flex items-center justify-center font-black font-mono shadow-md text-base">
-              C
+            <div className="h-9 w-9 rounded-xl bg-gradient-to-tr from-[var(--primary)] to-cyan-400 text-slate-950 flex items-center justify-center font-black font-mono shadow-md text-sm select-none">
+              LX
             </div>
             <div>
               <div className="flex items-center gap-1.5">
-                <span className="font-extrabold text-sm tracking-tight text-[var(--text)]">Codazi</span>
-                <span className="px-1.5 py-0.5 rounded-md bg-indigo-500/10 text-[var(--primary)] text-[10px] font-mono font-bold border border-indigo-500/20">
-                  BOOTCAMP
+                <span className="font-extrabold text-sm tracking-tight text-[var(--text)]">Lurnix</span>
+                <span className="px-1.5 py-0.5 rounded-md bg-[var(--bg-elevated)] text-[var(--primary)] text-[10px] font-mono font-bold border border-[var(--border)]">
+                  lurnix.tech
                 </span>
               </div>
               <p className="text-[10px] text-[var(--text-muted)] font-mono leading-none">

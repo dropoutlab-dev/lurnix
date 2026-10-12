@@ -261,80 +261,26 @@ export const HomePage: React.FC<HomePageProps> = ({
            LOGGED-IN EXPERIENCE: PERSONALIZED STUDENT DASHBOARD
            ========================================================================= */
         <div className="space-y-6">
-          {/* Top Hero Identity & Gamification Bar */}
-          <div className="rounded-3xl border border-[var(--border)] bg-gradient-to-b from-[var(--bg-card)] via-[var(--bg-elevated)] to-[var(--bg-card)] p-5 sm:p-6 shadow-sm relative overflow-hidden space-y-5">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-              <div className="flex items-center gap-3.5">
-                <div className="relative shrink-0">
-                  {user.avatar ? (
-                    <img
-                      src={user.avatar}
-                      alt={user.name}
-                      referrerPolicy="no-referrer"
-                      className="h-12 w-12 rounded-2xl object-cover border-2 border-[var(--border)] shadow-xs"
-                    />
-                  ) : (
-                    <div className="h-12 w-12 rounded-2xl bg-indigo-600/10 border-2 border-indigo-500/20 text-[var(--primary)] font-extrabold text-base flex items-center justify-center">
-                      {user.name.charAt(0).toUpperCase()}
-                    </div>
-                  )}
-                  <span className="absolute -bottom-0.5 -right-0.5 h-3.5 w-3.5 rounded-full bg-emerald-500 border-2 border-[var(--bg-card)]" title="Active Student" />
-                </div>
-
-                <div>
-                  <div className="flex items-center gap-2 flex-wrap">
-                    <h1 className="text-xl font-extrabold text-[var(--text)] tracking-tight">
-                      {getGreeting(language)}, {user.name}
-                    </h1>
-                    <span className="px-2.5 py-0.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-[var(--primary)] text-[11px] font-bold">
-                      {user.track || 'Full-Stack Track'}
-                    </span>
-                  </div>
-                  <p className="text-xs text-[var(--text-muted)] mt-0.5 font-mono">
-                    @{user.username || 'student'} • {user.provider === 'github' ? 'GitHub' : 'Google'} Account • Joined {user.joinedDate}
-                  </p>
-                </div>
+          {/* Action-First Continue Learning Hero Banner */}
+          <div className="rounded-3xl border border-indigo-500/30 bg-gradient-to-b from-[var(--bg-card)] via-[var(--bg-elevated)] to-[var(--bg-card)] p-5 sm:p-6 shadow-sm relative overflow-hidden space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div>
+                <h1 className="text-xl sm:text-2xl font-black text-[var(--text)] tracking-tight">
+                  {getGreeting(language)}, {user.name} 👋
+                </h1>
+                <p className="text-xs text-[var(--text-muted)] font-mono mt-0.5">
+                  {language === 'bn' ? 'তৈরি করে শিখুন। সৃষ্টি করে সমৃদ্ধ হন।' : 'Learn by Building. Grow by Creating.'}
+                </p>
               </div>
 
-              {/* Economy Header Badges */}
-              <div className="flex items-center gap-2 self-start sm:self-center shrink-0 flex-wrap">
-                <div className="px-3 py-1.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-xs font-bold text-emerald-400 font-mono flex items-center gap-1.5 shadow-xs">
-                  <span>💎</span>
-                  <span>{gemsBalance} Gems</span>
-                </div>
-
-                <div className="px-3 py-1.5 rounded-xl bg-[var(--bg-card)] border border-[var(--border)] text-xs font-bold text-cyan-400 font-mono flex items-center gap-1.5 shadow-xs">
-                  <Sparkles className="h-3.5 w-3.5 text-amber-400" />
-                  <span>Lv.{xpProfile.currentLevel} ({xpProfile.totalXP} XP)</span>
-                </div>
-
-                <div className="px-3 py-1.5 rounded-xl bg-[var(--bg-card)] border border-[var(--border)] text-xs font-semibold text-amber-400 font-mono flex items-center gap-1.5 shadow-xs">
-                  <Flame className="h-3.5 w-3.5 text-amber-400" />
-                  <span>{streakDays} d</span>
-                </div>
+              <div className="flex items-center gap-2 self-start sm:self-center shrink-0">
+                <span className="px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/25 text-[var(--primary)] text-xs font-mono font-bold">
+                  {user.track || 'Full-Stack Track'}
+                </span>
               </div>
             </div>
 
-            {/* Level Progression Progress Bar */}
-            <div className="p-3.5 rounded-2xl bg-[var(--bg-elevated)] border border-[var(--border)] space-y-2">
-              <div className="flex items-center justify-between text-xs font-mono">
-                <span className="text-[var(--text)] font-bold flex items-center gap-1.5">
-                  <Award className="h-4 w-4 text-indigo-400" />
-                  <span>Level {xpProfile.currentLevel} Progress</span>
-                </span>
-                <span className="text-[var(--text-muted)]">
-                  {xpProfile.xpInCurrentLevel} / {xpProfile.xpRequiredForNextLevel} XP ({xpProfile.levelProgressPercent}%)
-                </span>
-              </div>
-              <div className="h-2 w-full rounded-full bg-[var(--border)] overflow-hidden">
-                <div
-                  className="h-full rounded-full bg-gradient-to-r from-blue-500 via-indigo-500 to-cyan-400 transition-all duration-700"
-                  style={{ width: `${xpProfile.levelProgressPercent}%` }}
-                />
-              </div>
-            </div>
-
-            {/* Prominent Continue Learning Banner */}
+            {/* Prominent Continue Learning Card */}
             <div className="rounded-2xl border border-indigo-500/30 bg-gradient-to-r from-indigo-950/60 via-slate-900 to-indigo-950/40 p-4.5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
               <div className="space-y-1">
                 <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider text-indigo-400 font-mono">
@@ -370,53 +316,6 @@ export const HomePage: React.FC<HomePageProps> = ({
                   <span>{t.resumeLesson[language]}</span>
                   <ArrowRight className="h-4 w-4" />
                 </button>
-              </div>
-            </div>
-
-            {/* Verified Student Progress Metrics */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-1">
-              <div className="p-3.5 rounded-2xl bg-[var(--bg-card)] border border-[var(--border)] shadow-xs card-hover">
-                <div className="flex items-center gap-1.5 text-emerald-500 text-xs font-bold mb-1">
-                  <CheckCircle className="h-4 w-4" />
-                  <span>{t.lessonsCompleted[language]}</span>
-                </div>
-                <p className="text-xl font-extrabold text-[var(--text)] tracking-tight">
-                  {completedLessonsCount} <span className="text-xs font-normal text-[var(--text-muted)]">/ {totalLessons}</span>
-                </p>
-                <p className="text-[10px] text-[var(--text-muted)] mt-0.5 font-mono">{completionPercentage}% overall</p>
-              </div>
-
-              <div className="p-3.5 rounded-2xl bg-[var(--bg-card)] border border-[var(--border)] shadow-xs card-hover">
-                <div className="flex items-center gap-1.5 text-amber-500 text-xs font-bold mb-1">
-                  <FolderGit2 className="h-4 w-4" />
-                  <span>{t.verifiedProjects[language]}</span>
-                </div>
-                <p className="text-xl font-extrabold text-[var(--text)] tracking-tight">
-                  {verifiedProjectsCount} <span className="text-xs font-normal text-[var(--text-muted)]">/ {totalProjects}</span>
-                </p>
-                <p className="text-[10px] text-[var(--text-muted)] mt-0.5 font-mono">Portfolio Locks</p>
-              </div>
-
-              <div className="p-3.5 rounded-2xl bg-[var(--bg-card)] border border-[var(--border)] shadow-xs card-hover">
-                <div className="flex items-center gap-1.5 text-indigo-500 text-xs font-bold mb-1">
-                  <GitBranch className="h-4 w-4" />
-                  <span>{t.gitCommits[language]}</span>
-                </div>
-                <p className="text-xl font-extrabold text-[var(--text)] tracking-tight">
-                  {gitCommitsCount}
-                </p>
-                <p className="text-[10px] text-[var(--text-muted)] mt-0.5 font-mono">CLI Commits</p>
-              </div>
-
-              <div className="p-3.5 rounded-2xl bg-[var(--bg-card)] border border-[var(--border)] shadow-xs card-hover">
-                <div className="flex items-center gap-1.5 text-cyan-500 text-xs font-bold mb-1">
-                  <Clock className="h-4 w-4" />
-                  <span>{t.hoursLearned[language]}</span>
-                </div>
-                <p className="text-xl font-extrabold text-[var(--text)] tracking-tight">
-                  {studyHours} <span className="text-xs font-normal text-[var(--text-muted)]">hrs</span>
-                </p>
-                <p className="text-[10px] text-[var(--text-muted)] mt-0.5 font-mono">Active Time</p>
               </div>
             </div>
           </div>

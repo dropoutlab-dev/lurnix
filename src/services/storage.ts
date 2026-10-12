@@ -16,7 +16,8 @@ const STORAGE_KEYS = {
   COMPLETED_LESSONS: 'curious_learners_completed_lessons',
   VERIFIED_PROJECTS: 'curious_learners_verified_projects',
   SUBMITTED_VERIFICATIONS: 'curious_learners_submitted_verifications',
-  CACHE_TIMESTAMP: 'curious_learners_cache_time'
+  CACHE_TIMESTAMP: 'curious_learners_cache_time',
+  LAST_SYNCED_AT: 'lurnix_last_synced_at'
 };
 
 const CACHE_TTL_MS = 1000 * 60 * 15; // 15 Minutes Cache TTL
@@ -130,6 +131,25 @@ export function saveSyncQueue(queue: SyncMutation[]): void {
     localStorage.setItem(STORAGE_KEYS.SYNC_QUEUE, JSON.stringify(queue));
   } catch (err) {
     console.error('Failed to save sync queue:', err);
+  }
+}
+
+export function loadLastSyncedAt(): number | null {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEYS.LAST_SYNCED_AT);
+    if (!raw) return null;
+    const parsed = parseInt(raw, 10);
+    return isNaN(parsed) ? null : parsed;
+  } catch {
+    return null;
+  }
+}
+
+export function saveLastSyncedAt(timestamp: number): void {
+  try {
+    localStorage.setItem(STORAGE_KEYS.LAST_SYNCED_AT, String(timestamp));
+  } catch (err) {
+    console.error('Failed to save last synced timestamp:', err);
   }
 }
 

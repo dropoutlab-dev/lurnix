@@ -1,23 +1,50 @@
 @import "tailwindcss";
 
-:root {
-  --bg: hsl(210, 20%, 98%);
-  --bg-card: hsl(0, 0%, 100%);
-  --bg-elevated: hsl(210, 20%, 95%);
-  --text: hsl(222, 47%, 11%);
-  --text-muted: hsl(215, 16%, 47%);
-  --primary: hsl(221, 83%, 53%);
-  --primary-hover: hsl(221, 83%, 45%);
-  --border: hsl(214, 32%, 91%);
+/* ==========================================================================
+   LURNIX CENTRALIZED DESIGN TOKENS (LIGHT & DARK THEMES)
+   Brand: Lurnix (lurnix.tech)
+   Tagline: Learn by Building. Grow by Creating.
+   Philosophy: Learn → Build → Evolve
+   ========================================================================== */
 
+:root,
+[data-theme="light"] {
+  /* Typography Stacks */
+  --font-sans: "Inter", "Noto Sans Bengali", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* Centralized Lurnix Light Tokens */
+  --color-background: #F8FAFC;
+  --color-surface: #FFFFFF;
+  --color-text: #0F172A;
+  --color-text-muted: #475569;
+  --color-primary: #0891B2;
+  --color-primary-hover: #0e7490;
+  --color-primary-text: #0E7490; /* WCAG AA 5.12:1 compliant for normal text */
+  --color-success: #059669;
+  --color-success-text: #047857; /* WCAG AA 5.24:1 compliant for normal text */
+  --color-border: #E2E8F0;
+
+  /* Aliased System Tokens (Ensures 100% Backward-Compatibility across all UI components) */
+  --bg: var(--color-background);
+  --bg-card: var(--color-surface);
+  --bg-elevated: #F1F5F9;
+  --text: var(--color-text);
+  --text-muted: var(--color-text-muted);
+  --primary: var(--color-primary);
+  --primary-hover: var(--color-primary-hover);
+  --border: var(--color-border);
+  --success: var(--color-success);
+
+  /* Terminal Colors */
   --terminal-bg: #0d1117;
   --terminal-header-bg: #161b22;
   --terminal-text: #e6edf3;
   --terminal-muted: #8b949e;
   --terminal-border: #30363d;
-  --terminal-accent: #27c93f;
-  --terminal-prompt: #38bdf8;
-  --terminal-cursor: #34d399;
+  --terminal-accent: #059669;
+  --terminal-prompt: #0891B2;
+  --terminal-cursor: #059669;
 
   /* Smooth Easing Curves */
   --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
@@ -25,28 +52,45 @@
   --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.dark {
-  --bg: hsl(222, 47%, 7%);
-  --bg-card: hsl(222, 47%, 11%);
-  --bg-elevated: hsl(217, 33%, 17%);
-  --text: hsl(210, 40%, 98%);
-  --text-muted: hsl(215, 20%, 65%);
-  --primary: hsl(217, 91%, 60%);
-  --primary-hover: hsl(217, 91%, 68%);
-  --border: hsl(217, 19%, 24%);
+.dark,
+[data-theme="dark"] {
+  /* Centralized Lurnix Dark Tokens */
+  --color-background: #0B1020;
+  --color-surface: #111827;
+  --color-text: #FFFFFF;
+  --color-text-muted: #94A3B8;
+  --color-primary: #22D3EE;
+  --color-primary-hover: #38BDF8;
+  --color-primary-text: #22D3EE;
+  --color-success: #34D399;
+  --color-success-text: #34D399;
+  --color-border: #273449;
 
-  --terminal-bg: #0d1117;
-  --terminal-header-bg: #161b22;
-  --terminal-text: #e6edf3;
-  --terminal-muted: #8b949e;
-  --terminal-border: #30363d;
-  --terminal-accent: #27c93f;
-  --terminal-prompt: #38bdf8;
-  --terminal-cursor: #34d399;
+  /* Aliased System Tokens */
+  --bg: var(--color-background);
+  --bg-card: var(--color-surface);
+  --bg-elevated: #162032;
+  --text: var(--color-text);
+  --text-muted: var(--color-text-muted);
+  --primary: var(--color-primary);
+  --primary-hover: var(--color-primary-hover);
+  --border: var(--color-border);
+  --success: var(--color-success);
+
+  /* Terminal Colors */
+  --terminal-bg: #0B1020;
+  --terminal-header-bg: #111827;
+  --terminal-text: #FFFFFF;
+  --terminal-muted: #94A3B8;
+  --terminal-border: #273449;
+  --terminal-accent: #34D399;
+  --terminal-prompt: #22D3EE;
+  --terminal-cursor: #34D399;
 }
 
 /* Base Body smooth background/text transition */
 body {
+  font-family: var(--font-sans);
   background-color: var(--bg);
   color: var(--text);
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";

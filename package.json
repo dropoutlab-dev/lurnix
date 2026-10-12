@@ -9,7 +9,8 @@
     "start": "node dist/server.cjs",
     "clean": "rm -rf dist server.js",
     "lint": "tsc --noEmit",
-    "test": "tsx scripts/e2e-audit-test.ts"
+    "test": "tsx scripts/e2e-audit-test.ts && tsx scripts/design-system-audit.ts",
+    "test:design": "tsx scripts/design-system-audit.ts"
   },
   "dependencies": {
     "@google/genai": "^2.4.0",

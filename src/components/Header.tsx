@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Sun, Moon, Terminal, CalendarDays, Sparkles, Flame, CheckCircle2 } from 'lucide-react';
+import { Sun, Moon, Terminal, CalendarDays, Sparkles, Flame, CheckCircle2, Clock, RefreshCw } from 'lucide-react';
 import { Language, ThemeMode, UserProfile } from '../types';
 import { StreakState } from '../types/economy';
 import { t } from '../i18n/translations';
@@ -7,6 +7,8 @@ import { gemEconomy } from '../services/gemEconomy';
 import { progressionEngine } from '../services/progressionEngine';
 import { dailyGoalsEngine, StreakSubmitResult } from '../services/dailyGoalsEngine';
 import { StreakCheckInModal } from './StreakCheckInModal';
+import { loadLastSyncedAt, saveLastSyncedAt } from '../services/storage';
+import { subscribeSyncStatus, triggerManualSync } from '../services/syncWorker';
 
 interface HeaderProps {
   language: Language;
@@ -16,6 +18,8 @@ interface HeaderProps {
   onToggleTheme: () => void;
   isOnline: boolean;
   pendingSyncCount: number;
+  lastSyncedAt?: number | null;
+  onSyncNow?: () => Promise<void> | void;
   onStartSession?: () => void;
   onOpenGemsLedger?: () => void;
 }
@@ -28,6 +32,8 @@ export const Header: React.FC<HeaderProps> = ({
   onToggleTheme,
   isOnline,
   pendingSyncCount,
+  lastSyncedAt: propLastSyncedAt,
+  onSyncNow,
   onStartSession,
   onOpenGemsLedger
 }) => {
@@ -42,6 +48,63 @@ export const Header: React.FC<HeaderProps> = ({
     return dailyGoalsEngine.getStreakState(user?.id || 'guest');
   });
   const [isStreakModalOpen, setIsStreakModalOpen] = useState(false);
+
+  // Sync State Management
+  const [lastSyncedTime, setLastSyncedTime] = useState<number | null>(() => {
+    return propLastSyncedAt ?? loadLastSyncedAt() ?? Date.now();
+  });
+  const [currentPendingCount, setCurrentPendingCount] = useState<number>(pendingSyncCount);
+  const [isSyncingState, setIsSyncingState] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (propLastSyncedAt !== undefined) {
+      setLastSyncedTime(propLastSyncedAt);
+    }
+  }, [propLastSyncedAt]);
+
+  useEffect(() => {
+    setCurrentPendingCount(pendingSyncCount);
+  }, [pendingSyncCount]);
+
+  // Subscribe to background sync worker events
+  useEffect(() => {
+    const unsubscribe = subscribeSyncStatus((status) => {
+      if (status.lastSyncedAt) {
+        setLastSyncedTime(status.lastSyncedAt);
+      }
+      setCurrentPendingCount(status.pendingCount);
+      setIsSyncingState(status.isSyncing);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  const handleManualSync = async () => {
+    if (!isOnline || isSyncingState) return;
+    setIsSyncingState(true);
+    try {
+      if (onSyncNow) {
+        await onSyncNow();
+      } else {
+        await triggerManualSync();
+      }
+      const now = Date.now();
+      saveLastSyncedAt(now);
+      setLastSyncedTime(now);
+    } catch (err) {
+      console.error('Manual sync error:', err);
+    } finally {
+      setIsSyncingState(false);
+    }
+  };
+
+  const formatExactTime = (timestamp: number | null): string => {
+    if (!timestamp) return t.justNow[language];
+    const date = new Date(timestamp);
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
+    return `${hours}:${minutes}:${seconds}`;
+  };
 
   useEffect(() => {
     if (user) {
@@ -105,23 +168,67 @@ export const Header: React.FC<HeaderProps> = ({
         <div className="max-w-4xl mx-auto flex items-center justify-between">
           {/* Brand Logo */}
           <div className="flex items-center gap-2.5">
-            <div className="h-9 w-9 rounded-xl bg-gradient-to-tr from-[var(--primary)] to-indigo-500 flex items-center justify-center text-white shadow-md shadow-indigo-500/20 shrink-0">
-              <Terminal className="h-5 w-5" />
+            <div className="h-9 w-9 rounded-xl bg-gradient-to-tr from-[var(--primary)] to-cyan-400 flex items-center justify-center text-slate-950 shadow-md shadow-cyan-500/20 shrink-0 select-none">
+              <span className="font-mono text-xs tracking-tight font-extrabold">LX</span>
             </div>
             <div>
-              <span className="font-extrabold text-base tracking-tight text-[var(--text)] block leading-none">
-                {t.appName[language]}
-              </span>
-              <div className="flex items-center gap-1.5 mt-1">
-                <span
-                  className={`h-2 w-2 rounded-full ${
-                    isOnline ? 'bg-emerald-500 animate-pulse' : 'bg-amber-500'
-                  }`}
-                />
-                <span className="text-[10px] font-semibold text-[var(--text-muted)] tracking-wide uppercase">
-                  {isOnline ? t.online[language] : t.offline[language]}
-                  {pendingSyncCount > 0 && ` (${pendingSyncCount} ${t.syncing[language]})`}
+              <div className="flex items-center gap-1.5">
+                <span className="font-extrabold text-base tracking-tight text-[var(--text)] block leading-none">
+                  {t.appName[language]}
                 </span>
+                <span className="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-[var(--bg-elevated)] border border-[var(--border)] text-[var(--primary)] leading-none">
+                  tech
+                </span>
+              </div>
+              <div className="flex flex-wrap sm:flex-nowrap items-center gap-1.5 sm:gap-2 mt-1">
+                {/* Online / Offline status badge */}
+                <div className="flex items-center gap-1">
+                  <span
+                    className={`h-2 w-2 rounded-full ${
+                      isOnline ? 'bg-emerald-500 animate-pulse' : 'bg-amber-500'
+                    }`}
+                  />
+                  <span className="text-[10px] font-semibold text-[var(--text-muted)] tracking-wide uppercase font-mono">
+                    {isOnline ? t.online[language] : t.offline[language]}
+                  </span>
+                </div>
+
+                <span className="text-[var(--border)] text-[10px] font-mono hidden sm:inline">•</span>
+
+                {/* Persistent Last Synced Visual Indicator */}
+                <div
+                  className="flex items-center gap-1 text-[10px] font-mono text-[var(--text-muted)]"
+                  title={lastSyncedTime ? new Date(lastSyncedTime).toLocaleString() : 'Just now'}
+                >
+                  <Clock className="h-3 w-3 text-cyan-400 shrink-0" />
+                  <span>
+                    {t.lastSynced[language]}: <strong className="text-[var(--text)] font-semibold">{formatExactTime(lastSyncedTime)}</strong>
+                  </span>
+                </div>
+
+                {/* Manual 'Sync Now' Button when Online & Queue has pending items */}
+                {isOnline && currentPendingCount > 0 && (
+                  <button
+                    onClick={handleManualSync}
+                    disabled={isSyncingState}
+                    title="Process pending queue mutations now"
+                    aria-label="Sync pending queue now"
+                    className="inline-flex items-center gap-1 px-2 py-0.5 rounded-lg bg-cyan-500/15 hover:bg-cyan-500/25 text-cyan-400 dark:text-cyan-300 border border-cyan-500/30 text-[10px] font-mono font-bold transition-all shadow-xs cursor-pointer active:scale-95 disabled:opacity-50"
+                  >
+                    <RefreshCw className={`h-2.5 w-2.5 ${isSyncingState ? 'animate-spin' : ''}`} />
+                    <span>
+                      {isSyncingState ? t.syncing[language] : `${t.syncNow[language]} (${currentPendingCount})`}
+                    </span>
+                  </button>
+                )}
+
+                {/* Synced confirmation badge when 0 pending */}
+                {isOnline && currentPendingCount === 0 && (
+                  <span className="hidden sm:inline-flex items-center gap-1 text-[10px] font-mono text-emerald-500 dark:text-emerald-400">
+                    <CheckCircle2 className="h-2.5 w-2.5" />
+                    <span className="text-[9px] uppercase tracking-wider">{t.synced[language]}</span>
+                  </span>
+                )}
               </div>
             </div>
           </div>

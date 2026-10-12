@@ -38,8 +38,8 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({
         </button>
 
         <div className="flex flex-col items-center text-center">
-          <div className="h-16 w-16 rounded-2xl bg-gradient-to-tr from-[var(--primary)] to-indigo-500 flex items-center justify-center text-white shadow-xl shadow-indigo-500/25 mb-4">
-            <Terminal className="h-8 w-8" />
+          <div className="h-16 w-16 rounded-2xl bg-gradient-to-tr from-[var(--primary)] to-cyan-400 flex items-center justify-center text-slate-950 shadow-xl shadow-cyan-500/25 mb-4 select-none font-mono text-2xl font-black">
+            LX
           </div>
 
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-xs font-bold mb-2">

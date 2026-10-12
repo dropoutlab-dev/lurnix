@@ -100,8 +100,8 @@ export const AuthModal: React.FC<AuthModalProps> = ({
 
         {/* Modal Header */}
         <div className="text-center mb-5">
-          <div className="mx-auto h-12 w-12 rounded-2xl bg-gradient-to-tr from-[var(--primary)] to-indigo-500 flex items-center justify-center text-white shadow-lg shadow-indigo-500/20 mb-3">
-            <Shield className="h-6 w-6" />
+          <div className="mx-auto h-12 w-12 rounded-2xl bg-gradient-to-tr from-[var(--primary)] to-cyan-400 flex items-center justify-center text-slate-950 shadow-lg shadow-cyan-500/20 mb-3 font-mono font-black text-lg select-none">
+            LX
           </div>
 
           <h3 className="text-lg sm:text-xl font-black text-[var(--text)] tracking-tight">

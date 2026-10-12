@@ -5,12 +5,20 @@
 
 export const t = {
   appName: {
-    en: "Curious Learners",
-    bn: "কিউরিয়াস লার্নার্স"
+    en: "Lurnix",
+    bn: "লার্নিক্স"
   },
   tagline: {
-    en: "Learn Git & Modern Coding — Hand-on & Terminal-First",
-    bn: "গিট এবং আধুনিক কোডিং শিখুন — টার্মিনাল ও প্র্যাকটিক্যাল-ফার্স্ট"
+    en: "Learn by Building. Grow by Creating.",
+    bn: "তৈরি করে শিখুন। সৃষ্টি করে সমৃদ্ধ হন।"
+  },
+  brandPhilosophy: {
+    en: "Learn → Build → Evolve",
+    bn: "শিখুন → তৈরি করুন → বিবর্তিত হন"
+  },
+  brandDomain: {
+    en: "lurnix.tech",
+    bn: "lurnix.tech"
   },
   // Navigation Tabs
   navHome: {
@@ -49,6 +57,18 @@ export const t = {
   synced: {
     en: "Synced",
     bn: "সিঙ্ক হয়েছে"
+  },
+  lastSynced: {
+    en: "Last synced",
+    bn: "সর্বশেষ সিঙ্ক"
+  },
+  syncNow: {
+    en: "Sync Now",
+    bn: "এখনই সিঙ্ক"
+  },
+  justNow: {
+    en: "Just now",
+    bn: "এইমাত্র"
   },
   // Home Page
   welcomeBack: {
@@ -296,8 +316,8 @@ export const t = {
   },
   // Authentication & Profile
   loginTitle: {
-    en: "Sign In to Curious Learners",
-    bn: "কিউরিয়াস লার্নার্সে সাইন ইন করুন"
+    en: "Sign In to Lurnix",
+    bn: "লার্নিক্সে সাইন ইন করুন"
   },
   loginSubtitle: {
     en: "Connect with Google or GitHub to sync your learning progress and submit projects.",
@@ -336,8 +356,8 @@ export const t = {
     bn: "যাচাইকৃত স্কিলস"
   },
   pwaInstallTitle: {
-    en: "Install Curious Learners App",
-    bn: "কিউরিয়াস লার্নার্স অ্যাপ ইনস্টল করুন"
+    en: "Install Lurnix App",
+    bn: "লার্নিক্স অ্যাপ ইনস্টল করুন"
   },
   pwaInstallDesc: {
     en: "Get full offline access, instant terminal responses, and desktop/mobile homescreen shortcut.",
@@ -566,16 +586,16 @@ export const t = {
   },
   // Homepage Specific Translations
   heroTitle: {
-    en: "Start from the beginning. Build your way forward.",
-    bn: "একদম শুরু থেকে শুরু করুন। নিজের হাতে দক্ষতা গড়ে তুলুন।"
+    en: "Learn by Building. Grow by Creating.",
+    bn: "তৈরি করে শিখুন। সৃষ্টি করে সমৃদ্ধ হন।"
   },
   heroSubtitle: {
-    en: "Curious Learners is a 100% free of cost, open-source, terminal-first learning platform. Master full-stack web engineering through hands-on practice, verified projects, and guided progress.",
-    bn: "কিউরিয়াস লার্নার্স একটি ১০০% বিনামূল্যে, ওপেন-সোর্স, টার্মিনাল-ফার্স্ট লার্নিং প্ল্যাটফর্ম। প্র্যাকটিক্যাল কোডিং, ভেরিফায়েড প্রজেক্ট এবং নির্দেশিত গাইডলাইনের মাধ্যমে ফুল-স্ট্যাক ওয়েব ইঞ্জিনিয়ারিং শিখুন।"
+    en: "Lurnix (lurnix.tech) is a modern project-based technology learning platform. Master programming, practical software engineering, and future technology skills through hands-on building.",
+    bn: "লার্নিক্স একটি আধুনিক প্রজেক্ট-ভিত্তিক প্রযুক্তি লার্নিং প্ল্যাটফর্ম। বাস্তব প্রজেক্ট তৈরির মাধ্যমে প্রোগ্রামিং ও সফটওয়্যার ইঞ্জিনিয়ারিংয়ে দক্ষ হয়ে উঠুন।"
   },
   freeMissionBadge: {
-    en: "100% Free of Cost · Open Source · No Paywalls",
-    bn: "১০০% সম্পূর্ণ ফ্রি · ওপেন সোর্স · কোনো গোপন ফি নেই"
+    en: "Learn → Build → Evolve · Lurnix",
+    bn: "শিখুন → তৈরি করুন → বিবর্তিত হন · লার্নিক্স"
   },
   freeMissionTitle: {
     en: "Free & Open-Source Education Maintained with Care",
