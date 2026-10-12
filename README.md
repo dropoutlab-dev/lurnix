@@ -4,6 +4,7 @@
 > An open, production-grade learning platform by [DropOutLab](https://github.com/dropoutlab-dev).
 
 Official Platform Repository: [`https://github.com/dropoutlab-dev/lurnix`](https://github.com/dropoutlab-dev/lurnix)  
+Official Starter Template: [`https://github.com/dropoutlab-dev/lurnix-starter`](https://github.com/dropoutlab-dev/lurnix-starter)  
 Domain: [`lurnix.tech`](https://lurnix.tech)
 
 ---
